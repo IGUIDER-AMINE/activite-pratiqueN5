@@ -17,12 +17,12 @@ public class ProductRestController {
         this.productRepository=productRepository;
     }
     @GetMapping("/products")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     List<Product> productList(){
         return productRepository.findAll();
     }
     @GetMapping("/products/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('USER')")
     Product getProductById(@PathVariable String id){
         return productRepository.findById(id).get();
     }
