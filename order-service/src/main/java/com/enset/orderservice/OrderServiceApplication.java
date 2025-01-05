@@ -30,7 +30,7 @@ public class OrderServiceApplication {
                                         InventoryRestClient inventoryRestClient) {
         return args -> {
             //List<Product> allproducts = inventoryRestClient.getAllProducts();
-           List<String> producrtIds = List.of("P1","P2","P3");
+           List<String> producrtIds = List.of("P01","P02","P03");
             for(int i=0;i<5;i++){
                 Order order = Order.builder()
                         .id(UUID.randomUUID().toString())

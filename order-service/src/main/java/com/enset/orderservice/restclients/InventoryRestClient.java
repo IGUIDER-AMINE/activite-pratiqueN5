@@ -13,6 +13,6 @@ public interface InventoryRestClient {
     List<Product> getAllProducts();
 
     @GetMapping("/api/products/{id}")
-    Product getProductById(@PathVariable String id);
+    Product findProductById(@PathVariable String id);
 }
 

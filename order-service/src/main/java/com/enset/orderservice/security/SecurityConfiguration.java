@@ -20,7 +20,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfiguration {
+public class  SecurityConfiguration {
     JwtConverter jwtConverter;
     SecurityConfiguration(JwtConverter jwtConverter){
         this.jwtConverter=jwtConverter;
@@ -33,24 +33,13 @@ public class SecurityConfiguration {
                 .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf-> csrf.disable())
                 .headers(h->h.frameOptions(fo->fo.disable()))
-                .authorizeHttpRequests(ar->ar.requestMatchers("/h2-console/**").permitAll())
+                .authorizeHttpRequests(ar->ar.requestMatchers("/h2-console/**","/swagger-ui.html","/v3/**","/swagger-ui/**").permitAll())
                 //.authorizeHttpRequests(ar->ar.requestMatchers("api/products/**").hasAnyAuthority("ADMIN"))
                 //.authorizeHttpRequests(ar->ar.requestMatchers("/api/**","/h2-console/**").permitAll())
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
                 .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtConverter)))
                 //.oauth2ResourceServer(o2->o2.jwt(Customizer.withDefaults()))
                 .build();
-
-        /*return httpSecurity
-                .cors(Customizer.withDefaults())
-                .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(csrf-> csrf.disable())
-                .headers(h->h.frameOptions(fo->fo.disable()))
-                .authorizeHttpRequests(ar->ar.requestMatchers("/h2-console/**").permitAll())
-                //.authorizeHttpRequests(ar->ar.requestMatchers("api/products/**").hasAnyAuthority("ADMIN"))
-                .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
-                .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtConverter)))
-                .build();*/
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
